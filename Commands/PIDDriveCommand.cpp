@@ -15,7 +15,7 @@ void PIDDriveCommand::UsePIDOutput(double output)
 double PIDDriveCommand::ReturnPIDInput()
 {
 	//return Robot::rangeFinder->Distances[0];
-	return Robot::driveTrain->GetRotations();
+	return Robot::driveTrain->GetRightDistance();
 }
 
 void PIDDriveCommand::Initialize()

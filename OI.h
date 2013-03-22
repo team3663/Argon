@@ -30,6 +30,7 @@ private:
 	JoystickButton* turnRight;
 	
 	JoystickButton* pidDrive;
+	JoystickButton* changeAngle;
 	
 	Joystick* targetJoystick;
 	
