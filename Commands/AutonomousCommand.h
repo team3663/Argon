@@ -15,7 +15,9 @@
 
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
-
+#include "TurnDegreesCommand.h"
+#include "EncoderDriveToCommand.h"
+#include "DriveToPointCommand.h"
 /**
  *
  *

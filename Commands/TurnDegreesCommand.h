@@ -8,11 +8,14 @@
 class TurnDegreesCommand: public Command
 {
 private:
-	float _currAngle;
-	float _distanceToNewAngle;
-	float _newAngle;
+	float _degreesToTurn;
+	float turnProgress;
+	float driveSpeed;
+	float maxSpeed;
+	float decayFactor;
+	int   turnDirection;
 public:
-	TurnDegreesCommand();
+	TurnDegreesCommand(float degreesToTurn);
 protected:
 	void Initialize();
 	void Execute();

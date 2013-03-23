@@ -9,8 +9,8 @@
 // it from being updated in th future.
 
 
-#ifndef ENCODERDRIVETOCOMMAND_H
-#define ENCODERDRIVETOCOMMAND_H
+#ifndef DRIVETOPOINTCOMMAND_H
+#define DRIVETOPOINTCOMMAND_H
 
 
 #include "Commands/Subsystem.h"
@@ -19,19 +19,23 @@
 /**
  *
  *
- * @author ExampleAuthor
+ * @JWIEDERSPAN Jon Wiederspan
  */
-class EncoderDriveToCommand: public Command {
+class DriveToPointCommand: public Command {
 private:
+	bool  rfPort;
+	double& currDistance;
 	float driveSpeed;
 	float maxSpeed;
 	float curve;
 	float driveProgress;
 	float decayFactor;
 	bool  reachedEndpoint;
-	float driveDistance;
+	//double currDistance[4];
+	float _targetDistance;
+	float distanceToDrive;
 public:
-	EncoderDriveToCommand(float distanceToDrive);
+	DriveToPointCommand(float targetDistance, bool frontSonic);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

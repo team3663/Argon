@@ -17,7 +17,7 @@ TurnRightCommand::TurnRightCommand() {
 }
 // Called just before this Command runs the first time
 void TurnRightCommand::Initialize() {
-	Robot::driveTrain->Drive(0,0.725);
+	Robot::driveTrain->Drive(0,0.675);
 }
 // Called repeatedly when this Command is scheduled to run
 void TurnRightCommand::Execute() {

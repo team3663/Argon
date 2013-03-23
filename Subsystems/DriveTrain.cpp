@@ -71,6 +71,7 @@ void DriveTrain::Arcade()
 	prevRotateValue = rotateValue;
 	robotDrive3663->ArcadeDrive(-moveValue, -rotateValue);
 }
+
 void DriveTrain::GearShift(bool shift){
 	if(Robot::oi->GetX() < 0.1 && Robot::oi->GetX() > -0.1 && Robot::oi->GetY() > -0.1 && Robot::oi->GetY() < 0.1){
 	gearShift1->Set(shift);
@@ -86,7 +87,7 @@ void DriveTrain::ResetGyro()
 
 void DriveTrain::Drive(float speed, float curve)
 {
-	robotDrive3663->ArcadeDrive(speed,curve);
+	robotDrive3663->ArcadeDrive(-speed,curve);
 }
 void DriveTrain::Stop(){
 	Drive(0,0);
