@@ -9,24 +9,23 @@
 // it from being updated in th future.
 
 
-#ifndef AUTONOMOUS_COMMAND_H
-#define AUTONOMOUS_COMMAND_H
+#ifndef SETSHOOTSPEEDCOMMAND_H
+#define SETSHOOTSPEEDCOMMAND_H
 
 
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
-#include "TurnDegreesCommand.h"
-#include "EncoderDriveToCommand.h"
-#include "DriveToPointCommand.h"
-#include "SetShootSpeedCommand.h"
+
 /**
  *
  *
  * @author ExampleAuthor
  */
-class AutonomousCommand: public CommandGroup {
+class SetShootSpeedCommand: public Command {
+private:
+	float _changeBy;
 public:
-	AutonomousCommand();
+	SetShootSpeedCommand(float changeBy);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

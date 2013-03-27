@@ -11,11 +11,11 @@ private:
 	float _degreesToTurn;
 	float turnProgress;
 	float driveSpeed;
-	float maxSpeed;
+	float _maxSpeed;
 	float decayFactor;
 	int   turnDirection;
 public:
-	TurnDegreesCommand(float degreesToTurn);
+	TurnDegreesCommand(float degreesToTurn, float maxSpeed, float decay);
 protected:
 	void Initialize();
 	void Execute();

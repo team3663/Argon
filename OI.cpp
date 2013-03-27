@@ -25,6 +25,8 @@
 #include "Commands/GearShiftCommand.h"
 #include "Commands/GearShiftDown.h"
 #include "Commands/GearShiftUp.h"
+#include "Commands/HorizontalTargetCommand.h"
+#include "Commands/VerticalTargetCommand.h"
 #include "Commands/IncreasePitchCommand.h"
 #include "Commands/ShootPistonCommand.h"
 #include "Commands/SpinCommand.h"
@@ -50,12 +52,6 @@ OI::OI() {
 	resetGyro = new JoystickButton(driveJoystick, 3);
 	resetGyro->WhenPressed(new ResetGyroCommand());
 	
-	flipFrisbees = new JoystickButton(driveJoystick, 6);
-	flipFrisbees->WhenPressed(new FlipperCommand());
-	
-	nudgeFrisbees = new JoystickButton(driveJoystick, 7);
-	nudgeFrisbees->WhenPressed(new NudgeFlipperCommand());
-	
 	climbDown = new JoystickButton(driveJoystick, 10);
 	climbDown->WhileHeld(new ClimbDownCommand());
 	
@@ -66,13 +62,16 @@ OI::OI() {
 	pidDrive->WhenPressed(new EncoderDriveToCommand(48));
 	
 	changeAngle = new JoystickButton(driveJoystick, 5);
-	changeAngle->WhenPressed(new TurnDegreesCommand(45));
+	changeAngle->WhenPressed(new TurnDegreesCommand(45, 0.6, 3));
+	
+	htarget = new JoystickButton(driveJoystick, 8);
+	htarget->WhenPressed(new HorizontalTargetCommand());
+	
+	vtarget = new JoystickButton(driveJoystick, 9);
+	vtarget->WhenPressed(new VerticalTargetCommand());
 	///////////////////////////////////////////////////////////////////
 	
 	targetJoystick = new Joystick(2);
-	
-	target = new JoystickButton(targetJoystick, 10);
-	target->WhenPressed(new TargettingCommand());
 	
 	turnLeft = new JoystickButton(targetJoystick, 5);
 	turnLeft->WhileHeld(new TurnLeftCommand());

@@ -9,24 +9,29 @@
 // it from being updated in th future.
 
 
-#ifndef AUTONOMOUS_COMMAND_H
-#define AUTONOMOUS_COMMAND_H
+#ifndef DRIVETOLINECOMMAND_H
+#define DRIVETOLINECOMMAND_H
 
 
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
-#include "TurnDegreesCommand.h"
-#include "EncoderDriveToCommand.h"
-#include "DriveToPointCommand.h"
-#include "SetShootSpeedCommand.h"
+
 /**
  *
  *
  * @author ExampleAuthor
  */
-class AutonomousCommand: public CommandGroup {
+class DriveToLineCommand: public Command {
+private:
+	float driveSpeed;
+	float maxSpeed;
+	float curve;
+	float driveProgress;
+	float decayFactor;
+	bool  reachedEndpoint;
+	float driveDistance;
 public:
-	AutonomousCommand();
+	DriveToLineCommand(float distanceToDrive);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

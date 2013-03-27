@@ -5,16 +5,20 @@
 
 Targetting::Targetting(): Subsystem("Targetting"), _camera(AxisCamera::GetInstance("10.36.63.11"))
 {
-	//ledRelay = new Relay(1, 2);
-	//ledRelay->Set(Relay::kOn);
+	newestData = NULL;
 }
 
 Targetting::~Targetting()
 {
-	//delete(ledRelay);
+	delete (newestData);
 }
 
-void Targetting::Target()
+ParticleAnalysisReport* Targetting::GetNewestRect()
+{
+	return &newestData->at(0);
+}
+
+bool Targetting::Target()
 {
 	static int i = 0;
 	Threshold threshold(0, 150, 200, 255, 200, 255);
@@ -29,7 +33,7 @@ void Targetting::Target()
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Can't get image");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
-		return;
+		return false;
 	}
 	else if (image->GetHeight() == 0 || image->GetWidth() == 0)
 	{
@@ -37,7 +41,7 @@ void Targetting::Target()
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Height/width is zero");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
-		return;
+		return false;
 	}
 	BinaryImage *thresholdImage = image->ThresholdRGB(threshold);
 	BinaryImage *convexHullImage = thresholdImage->ConvexHull(false);
@@ -47,13 +51,13 @@ void Targetting::Target()
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Can't process");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
-		return;
+		return false;
 	}
-	convexHullImage->Write("/imageResult.jpg");
+	//convexHullImage->Write("/imageResult.jpg");
 	//imaqWriteJPEGFile(convexHullImage->GetImaqImage(), "/TestImage.jpeg", 100, convexHullImage->);
 	vector<ParticleAnalysisReport> *reports = convexHullImage->GetOrderedParticleAnalysisReports();
-	
-	screen->PrintfLine(DriverStationLCD::kUser_Line4, "Num. of rectangles: %i", reports->size());
+	int rectNum = reports->size();
+	screen->PrintfLine(DriverStationLCD::kUser_Line4, "Num: %i, (%i, %i)", rectNum, rectNum ? reports->at(0).center_mass_x : 0, rectNum ? reports->at(0).center_mass_y : 0);
 	screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 	if (reports->size() != 0)
 	{
@@ -67,7 +71,9 @@ void Targetting::Target()
 		{
 			outputFile << "Report num " << (num + 1) << "\n";
 			outputFile << "Rect Center X: " << reports->at(num).center_mass_x << "\n";
+			outputFile << "Rect Relative Center X: " << reports->at(num).center_mass_x_normalized << "\n";
 			outputFile << "Rect Center Y: " << reports->at(num).center_mass_y << "\n";
+			outputFile << "Rect Relative Center Y: " << reports->at(num).center_mass_y_normalized << "\n";
 			outputFile << "Rect Width: " << reports->at(num).boundingRect.width << "\n";
 			outputFile << "Rect Height: " << reports->at(num).boundingRect.height << "\n \n";
 		}
@@ -75,7 +81,9 @@ void Targetting::Target()
 	}
 	screen->UpdateLCD();
 	
+	delete(newestData);
+	newestData = reports;
 	delete(thresholdImage);
 	delete(convexHullImage);
-	delete(reports);
+	return true;
 }

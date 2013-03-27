@@ -24,7 +24,8 @@ private:
 	JoystickButton* decreasePitch;
 	JoystickButton* increasePitch;
 	JoystickButton* shootPiston;
-	JoystickButton* target;
+	JoystickButton* htarget;
+	JoystickButton* vtarget;
 	JoystickButton* resetGyro;
 	JoystickButton* turnLeft;
 	JoystickButton* turnRight;

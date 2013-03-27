@@ -9,10 +9,13 @@ class Targetting: public Subsystem
 {
 private:
 	AxisCamera& _camera;
+	vector<ParticleAnalysisReport> *newestData;
 public:
+	ParticleAnalysisReport* GetNewestRect();
 	Targetting();
 	~Targetting();
-	void Target();
+	bool Target();
+	
 };
 
 #endif
