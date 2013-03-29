@@ -59,5 +59,6 @@ bool Shooter::GetShooterState(){
 }
 void Shooter::UpdateStatus(){
 	SmartDashboard::PutNumber("Shoot Setting: ", _shootSpeed * 100);
-	SmartDashboard::PutNumber("Shoot Rate: ", shooterEncoder->GetRate()/1440);
+	SmartDashboard::PutBoolean("Shooter On", _isShooting);
+	//SmartDashboard::PutNumber("Shoot Rate: ", shooterEncoder->GetRate()/1440);
 }

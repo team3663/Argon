@@ -22,8 +22,10 @@
  * @author ExampleAuthor
  */
 class IncreasePitchCommand: public Command {
+private:
+	const float _timeout;
 public:
-	IncreasePitchCommand();
+	IncreasePitchCommand(float timeout = -1.0);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

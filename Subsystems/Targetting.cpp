@@ -81,9 +81,16 @@ bool Targetting::Target()
 	}
 	screen->UpdateLCD();
 	
+	
+	
 	delete(newestData);
 	newestData = reports;
+	
+	
+	
 	delete(thresholdImage);
 	delete(convexHullImage);
 	return true;
 }
+
+

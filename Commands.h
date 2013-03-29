@@ -8,6 +8,8 @@
 #include "Commands/ShootPistonCommand.h"
 #include "Commands/SpinDownCommand.h"
 #include "Commands/SpinUpCommand.h"
+#include "Commands/GearShiftUp.h"
+#include "Commands/GearShiftDown.h"
 #include "Commands/TurnLeftCommand.h"
 #include "Commands/TurnRightCommand.h"
 #include "Commands/CheckCompressorSwitch.h"

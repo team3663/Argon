@@ -24,14 +24,14 @@
 class DriveToLineCommand: public Command {
 private:
 	float driveSpeed;
-	float maxSpeed;
+	float _maxSpeed;
 	float curve;
 	float driveProgress;
 	float decayFactor;
 	bool  reachedEndpoint;
 	float driveDistance;
 public:
-	DriveToLineCommand(float distanceToDrive);
+	DriveToLineCommand(float distanceToDrive, float maxSpeed, int decay);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

@@ -35,7 +35,7 @@ private:
 	float _targetDistance;
 	float distanceToDrive;
 public:
-	DriveToPointCommand(float targetDistance, bool frontSonic);
+	DriveToPointCommand(float targetDistance, float maxSpeed, int frontSonic);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

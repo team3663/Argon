@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "DriveToPointCommand.h"
-DriveToPointCommand::DriveToPointCommand(float targetDistance, bool frontSonic): rfPort(frontSonic), currDistance(Robot::rangeFinder->Distances[rfPort ? 0 : 1]) {
+DriveToPointCommand::DriveToPointCommand(float targetDistance, float maxSpeed, int frontSonic): rfPort(frontSonic), currDistance(Robot::rangeFinder->Distances[rfPort ? 0 : 1]) {
 	// driveDirection: 1 = forward, -1 = backward (other sides can't drive straight)
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -16,7 +16,7 @@ DriveToPointCommand::DriveToPointCommand(float targetDistance, bool frontSonic):
 	Requires(Robot::driveTrain);
 	
 	driveSpeed      = 0;      // speed value for robot drive
-	maxSpeed        = 0.8;    // maximum speed for driving
+	this->maxSpeed  = maxSpeed;    // maximum speed for driving
 	curve           = 0;      // curve value for robot drive
 	distanceToDrive = 0;      // how far to drive
 	decayFactor     = 3;      // how rapidly to decrease speed as approaching target
@@ -39,7 +39,7 @@ void DriveToPointCommand::Initialize() {
 	Wait(0.2);          	// drive for a short while
 	//currDistance = Robot::rangeFinder->GetDistance();
 
-	distanceToDrive = currDistance - _targetDistance;
+	distanceToDrive = _targetDistance - currDistance ;
 }
 
 void DriveToPointCommand::Execute() {
@@ -50,7 +50,7 @@ void DriveToPointCommand::Execute() {
 		reachedEndpoint = true;
 	}
 	// if we haven't reached target point, set drive speed
-	driveSpeed = ((currDistance - _targetDistance)/distanceToDrive) * decayFactor * maxSpeed;
+	driveSpeed = ((_targetDistance - currDistance)/distanceToDrive) * decayFactor * maxSpeed;
 	if (driveSpeed > maxSpeed) driveSpeed  = maxSpeed; // just in case, make sure it doesn't drive too fast
 	if (driveSpeed < 0.20) driveSpeed = 0.20;     // don't drive any slower than that or it doesn't move
     // check that both encoders are measuring the same
