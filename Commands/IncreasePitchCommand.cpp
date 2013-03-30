@@ -18,7 +18,8 @@ IncreasePitchCommand::IncreasePitchCommand(float timeout): _timeout(timeout) {
 }
 // Called just before this Command runs the first time
 void IncreasePitchCommand::Initialize() {
-	Robot::pitch->IncreasePitch();
+	if(!Robot::pitch->UpperLimitReached())
+		Robot::pitch->IncreasePitch();
 }
 // Called repeatedly when this Command is scheduled to run
 void IncreasePitchCommand::Execute() {

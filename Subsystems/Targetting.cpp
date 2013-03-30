@@ -3,6 +3,9 @@
 #include "DriverStationLCD.h"
 #include <fstream>
 
+#define DISTANCE_RATIO 2.2
+#define CONSTANT 20
+
 Targetting::Targetting(): Subsystem("Targetting"), _camera(AxisCamera::GetInstance("10.36.63.11"))
 {
 	newestData = NULL;
@@ -10,12 +13,53 @@ Targetting::Targetting(): Subsystem("Targetting"), _camera(AxisCamera::GetInstan
 
 Targetting::~Targetting()
 {
+	newestData->clear();
 	delete (newestData);
 }
 
-ParticleAnalysisReport* Targetting::GetNewestRect()
+ParticleAnalysisReport* Targetting::FindRectWithRatio(float targetRatio, float tolerance)
 {
-	return &newestData->at(0);
+	for (unsigned int i = 0; i < newestData->size(); i++)
+	{
+		ParticleAnalysisReport* currRect = &newestData->at(i);
+		float ratio = currRect->boundingRect.width / currRect->boundingRect.height;
+		if (ratio < (targetRatio + tolerance) && ratio > (targetRatio - tolerance))
+		{
+			return currRect;
+		}
+	}
+	return NULL;
+}
+
+ParticleAnalysisReport* Targetting::GetTargetRect()
+{
+	switch(*(static_cast<int*>(Robot::targetChooser->GetSelected())))
+	{
+	case 1:
+		return &newestData->at(0);
+	case 2:
+		return GetTwoPointRect();
+	case 3:
+		return GetThreePointRect();
+	default:
+		return &newestData->at(0);
+	}
+}
+
+ParticleAnalysisReport* Targetting::GetThreePointRect()
+{
+	return FindRectWithRatio(4.5, 0.2);
+}
+
+ParticleAnalysisReport* Targetting::GetTwoPointRect()
+{
+	return FindRectWithRatio(2.3, 0.3);
+}
+
+float Targetting::CalcDistance(ParticleAnalysisReport* rect)
+{
+	return DISTANCE_RATIO * rect->boundingRect.width + CONSTANT;
+	// FAR_FEET - (width - FARDIST_WIDTH) * (STEP_FEET / STEP_WIDTH)
 }
 
 bool Targetting::Target()
@@ -29,7 +73,6 @@ bool Targetting::Target()
 	//image = new RGBImage("/testImage.jpg");
 	if (image == NULL)
 	{
-		screen->Clear();
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Can't get image");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
@@ -37,7 +80,6 @@ bool Targetting::Target()
 	}
 	else if (image->GetHeight() == 0 || image->GetWidth() == 0)
 	{
-		screen->Clear();
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Height/width is zero");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
@@ -47,7 +89,6 @@ bool Targetting::Target()
 	BinaryImage *convexHullImage = thresholdImage->ConvexHull(false);
 	if (convexHullImage == NULL)
 	{
-		screen->Clear();
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Can't process");
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Time: %i", i++);
 		screen->UpdateLCD();
@@ -81,12 +122,8 @@ bool Targetting::Target()
 	}
 	screen->UpdateLCD();
 	
-	
-	
 	delete(newestData);
 	newestData = reports;
-	
-	
 	
 	delete(thresholdImage);
 	delete(convexHullImage);

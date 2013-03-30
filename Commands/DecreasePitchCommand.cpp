@@ -18,7 +18,8 @@ DecreasePitchCommand::DecreasePitchCommand(float timeout): _timeout(timeout) {
 }
 // Called just before this Command runs the first time
 void DecreasePitchCommand::Initialize() {
-	Robot::pitch->DecreasePitch();
+	if(!Robot::pitch->LowerLimitReached())
+		Robot::pitch->DecreasePitch();
 }
 // Called repeatedly when this Command is scheduled to run
 void DecreasePitchCommand::Execute() {

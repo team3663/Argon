@@ -15,6 +15,8 @@ private:
 	Joystick* driveJoystick;
 	Joystick* targetJoystick;
 	
+	JoystickButton* targetButton;
+	
 	JoystickButton* changeShooter;
 	JoystickButton* gearShift;
 	JoystickButton* flipFrisbees;

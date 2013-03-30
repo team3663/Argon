@@ -22,7 +22,7 @@ void VerticalTargetCommand::Execute()
 	{
 		DriverStationLCD::GetInstance()->PrintfLine(DriverStationLCD::kUser_Line5, "Targetting Worked");
 		DriverStationLCD::GetInstance()->UpdateLCD();
-		double difference = Robot::targetting->GetNewestRect()->center_mass_y_normalized;
+		double difference = Robot::targetting->GetTargetRect()->center_mass_y_normalized;
 		if (difference > 0.0)
 		{
 			//Robot::pitch->IncreasePitch(difference * 5);
