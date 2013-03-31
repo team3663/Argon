@@ -58,7 +58,7 @@ void DriveToLineCommand::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool DriveToLineCommand::IsFinished() {
-	return reachedEndpoint || IsTimedOut() || Robot::photoelectric->GetCurrentStatus();  // returns true if endpoint or timed out
+	return reachedEndpoint || IsTimedOut() || Robot::photoelectric->GetGroundStatus();  // returns true if endpoint or timed out
 }
 // Called once after isFinished returns true
 void DriveToLineCommand::End() {

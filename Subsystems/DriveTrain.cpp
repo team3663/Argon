@@ -45,6 +45,8 @@ void DriveTrain::Arcade()
 {
 	if (Robot::oi->getDriveJoystick()->GetZ() >= 0.0)
 	{
+		if(highGear)
+		{
 		static float prevMoveValue = 0;
 		static float prevRotateValue = 0;
 		
@@ -72,6 +74,10 @@ void DriveTrain::Arcade()
 		prevMoveValue = moveValue;
 		prevRotateValue = rotateValue;
 		robotDrive3663->ArcadeDrive(moveValue, rotateValue);
+		}
+		else{
+			robotDrive3663->ArcadeDrive(Robot::oi->getDriveJoystick()->GetY(), Robot::oi->getDriveJoystick()->GetX());
+		}
 	}
 	else
 	{

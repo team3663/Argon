@@ -9,13 +9,9 @@ class TurnDegreesCommand: public Command
 {
 private:
 	float _degreesToTurn;
-	float turnProgress;
-	float driveSpeed;
-	float _maxSpeed;
-	float decayFactor;
-	int   turnDirection;
+	float _turnSpeed;
 public:
-	TurnDegreesCommand(float degreesToTurn, float maxSpeed, float decay);
+	TurnDegreesCommand(float degreesToTurn, float turnSpeed = 0.5);
 protected:
 	void Initialize();
 	void Execute();

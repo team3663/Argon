@@ -24,7 +24,7 @@ void CheckForLinesCommand::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool CheckForLinesCommand::IsFinished() {
-	if (Robot::photoelectric->GetCurrentStatus() == true)
+	if (Robot::photoelectric->GetGroundStatus() == true)
 	{
 		Robot::driveTrain->Stop();
 		return true;

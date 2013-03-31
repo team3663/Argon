@@ -85,7 +85,7 @@ void HorizontalTargetCommand::Execute()
 		float difference = abs(TARGET_POINT - rect->center_mass_x);
 		float degreesToTurn = (TARGET_POINT - rect->center_mass_x) * 67 / 640;
 		//float degreesToTurn = difference / (3.14 * 2 * distance) * 100 / 360; // find percentage of circle we have to travel then convert to degrees
-		TurnDegreesCommand(degreesToTurn, 0.5, 5).Run();
+		TurnDegreesCommand(degreesToTurn, 0.5).Run();
 	}
 }
 

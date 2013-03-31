@@ -23,17 +23,17 @@
  */
 class DriveToPointCommand: public Command {
 private:
-	bool  rfPort;
-	double& currDistance;
-	float driveSpeed;
+	float targetDistance;
 	float maxSpeed;
+	int   frontSonic;
+	double currDistance; // array of ultrasonic values [front,back,left,right]
+	float driveSpeed;
+	float distanceToDrive;
 	float curve;
 	float driveProgress;
 	float decayFactor;
 	bool  reachedEndpoint;
 	//double currDistance[4];
-	float _targetDistance;
-	float distanceToDrive;
 public:
 	DriveToPointCommand(float targetDistance, float maxSpeed, int frontSonic);
 	virtual void Initialize();

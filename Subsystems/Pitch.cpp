@@ -43,7 +43,7 @@ void Pitch::SetPitch(bool isIncreasing){
 		pitchMotor->Set(0.0);
 	}
 	*/
-	pitchMotor->Set(isIncreasing ? 0.8 : -0.8);
+	pitchMotor->Set(isIncreasing ? 0.9 : -0.8);
 }
 	
 bool Pitch::UpperLimitReached()

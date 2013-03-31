@@ -49,10 +49,10 @@ OI::OI() {
 	targetButton = new JoystickButton(driveJoystick, 1);
 	targetButton->WhenPressed(new TargettingCommand());
 	
-	gearShift = new JoystickButton(driveJoystick, 2);
+	gearShift = new JoystickButton(driveJoystick, 3);
 	gearShift->WhenPressed(new GearShiftUp());
 	
-	resetGyro = new JoystickButton(driveJoystick, 3);
+	resetGyro = new JoystickButton(driveJoystick, 2);
 	resetGyro->WhenPressed(new GearShiftDown());
 	
 	climbDown = new JoystickButton(driveJoystick, 10);
@@ -101,8 +101,10 @@ OI::OI() {
 	increaseShootSpeed->WhenPressed(new AdjustShootSpeedCommand(0.025));
      
         // SmartDashboard Buttons
-	SmartDashboard::PutData("Turn 90", new TurnDegreesCommand(90, 0.6, 3));
+	SmartDashboard::PutData("Turn 90", new TurnDegreesCommand(90, 0.6));
+	SmartDashboard::PutData("Turn -90", new TurnDegreesCommand(-90, 0.6));
 	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveToCommand(60));
+	SmartDashboard::PutData("Target", new HorizontalTargetCommand());
 	/*SmartDashboard::PutData("DriveCommand", new DriveCommand());
 	SmartDashboard::PutData("SpinUpCommand", new SpinUpCommand());
 	SmartDashboard::PutData("ShootPistonCommand", new ShootPistonCommand());

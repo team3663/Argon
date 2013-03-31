@@ -31,7 +31,8 @@ DigitalInput* RobotMap::pitchLimitSwitchMax = NULL;
 DigitalInput* RobotMap::pitchLimitSwitchMin = NULL;
 Relay* RobotMap::pneumaticsCompressorSwitch = NULL;
 DigitalInput* RobotMap::pneumaticsCompressorLimitSwitch = NULL;
-DigitalInput* RobotMap::photoelectricLightSensor = NULL;
+DigitalInput* RobotMap::photoelectricGroundSensor = NULL;
+DigitalInput* RobotMap::photoelectricShooterSensor = NULL;
 SpeedController* RobotMap::climberClimbMotorController = NULL;
 DigitalInput* RobotMap::climberUpperLimitSwitch = NULL;
 DigitalInput* RobotMap::climberLowerLimitSwitch = NULL;
@@ -121,8 +122,11 @@ void RobotMap::init() {
 	pneumaticsCompressorLimitSwitch = new DigitalInput(1, 5);
 	lw->AddSensor("Pneumatics", "CompressorLimitSwitch", pneumaticsCompressorLimitSwitch);
 	
-	photoelectricLightSensor = new DigitalInput(1, 14);
-	lw->AddSensor("Photoelectric", "LightSensor", photoelectricLightSensor);
+	photoelectricGroundSensor = new DigitalInput(1, 14);
+	lw->AddSensor("Photoelectric", "GroundSensor", photoelectricGroundSensor);
+	
+	photoelectricShooterSensor = new DigitalInput(1, 2);
+	lw->AddSensor("DiskManagement", "ShooterLightSensor", photoelectricShooterSensor);
 	
 	climberClimbMotorController = new Victor(1, 8);
 	lw->AddActuator("Climber", "ClimbMotorController", (Victor*) climberClimbMotorController);

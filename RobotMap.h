@@ -41,7 +41,8 @@ public:
 	static DigitalInput* pitchLimitSwitchMin;
 	static Relay* pneumaticsCompressorSwitch;
 	static DigitalInput* pneumaticsCompressorLimitSwitch;
-	static DigitalInput* photoelectricLightSensor;
+	static DigitalInput* photoelectricGroundSensor;
+	static DigitalInput* photoelectricShooterSensor;
 	static SpeedController* climberClimbMotorController;
 	static DigitalInput* climberUpperLimitSwitch;
 	static DigitalInput* climberLowerLimitSwitch;

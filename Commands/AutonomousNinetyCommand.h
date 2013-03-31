@@ -9,29 +9,27 @@
 // it from being updated in th future.
 
 
-#ifndef ENCODERDRIVETOCOMMAND_H
-#define ENCODERDRIVETOCOMMAND_H
+#ifndef TURN_NINETY_COMMAND_H
+#define TURN_NINETY_COMMAND_H
 
 
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
-
+#include "TurnDegreesCommand.h"
+#include "DriveToLineCommand.h"
+#include "NudgeFlipperCommand.h"
+#include "GearShiftUp.h"
+#include "EncoderDriveToCommand.h"
+#include "DriveToPointCommand.h"
+#include "SetShootSpeedCommand.h"
 /**
  *
  *
  * @author ExampleAuthor
  */
-class EncoderDriveToCommand: public Command {
-private:
-	float distanceToDrive;
-	float maxSpeed;
-	float decayFactor;
-	float driveSpeed;
-	float curve;
-	float driveProgress;
-	bool reachedEndpoint;
+class AutonomousNinetyCommand: public CommandGroup {
 public:
-	EncoderDriveToCommand(float distanceToDrive, float maxSpeed = 0.8, float decayFactor = 4.0);
+	AutonomousNinetyCommand();
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
