@@ -142,6 +142,7 @@ void DriveTrain::DriveEncoderReset(){
 void DriveTrain::UpdateStatus()
 {
 	SmartDashboard::PutNumber("Right Encoder:", GetRightDistance());
+	SmartDashboard::PutNumber("Left Encoder:", GetLeftDistance());
 	SmartDashboard::PutNumber("Gyro", GetAngle());
 	if (highGear)
 		SmartDashboard::PutString("Transmission:", "High Gear");
