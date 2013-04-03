@@ -1,7 +1,9 @@
 #include "HorizontalTargetCommand.h"
 
-#define TARGET_POINT 520
-#define TOLERANCE 50
+// these need to be replaced. It should look up the center of the target rectangle from wherever we record which target we are aiming for.
+// For now, it just aims for the three point target
+#define TARGET_POINT 400   // 400 pixels on the screen where 0,0 is top-left
+#define TOLERANCE 5        // can be five pixels off either way and still fine, but that is a guess
 
 HorizontalTargetCommand::HorizontalTargetCommand()
 {
