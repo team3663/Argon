@@ -24,8 +24,9 @@
 class DecreasePitchCommand: public Command {
 private:
 	const float _timeout;
+	float _changeRate;
 public:
-	DecreasePitchCommand(float timeout = -1.0);
+	DecreasePitchCommand(float changeRate, float timeout = -1.0);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

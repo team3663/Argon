@@ -18,6 +18,7 @@
  */
 class Pneumatics: public Subsystem {
 private:
+	bool compressOn;
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 public:
@@ -29,5 +30,6 @@ public:
 	void TurnOff();
 	void TurnOn();
 	void InitDefaultCommand();
+	void UpdateStatus();
 };
 #endif

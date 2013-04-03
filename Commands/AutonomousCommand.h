@@ -22,6 +22,7 @@
 #include "EncoderDriveToCommand.h"
 #include "DriveToPointCommand.h"
 #include "SetShootSpeedCommand.h"
+#include "AutonomousFinishedCommand.h"
 /**
  *
  *

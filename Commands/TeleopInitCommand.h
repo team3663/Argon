@@ -16,8 +16,9 @@ protected:
 	void End();
 	void Interrupted();
 private:
-	static const float maxDriveSpeed = 0.8;
-	static const float minDriveSpeed = 0.4;
+	static const float maxDriveSpeed   = 0.8;
+	static const float minDriveSpeed   = 0.4;
+	static const float distanceToDrive = 240;
 };
 
 #endif

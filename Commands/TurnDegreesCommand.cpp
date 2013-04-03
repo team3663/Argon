@@ -5,7 +5,7 @@ TurnDegreesCommand::TurnDegreesCommand(float degreesToTurn, float turnSpeed)
 {
 	Requires(Robot::driveTrain);
 	_degreesToTurn = degreesToTurn;
-	_turnSpeed    = turnSpeed;  // the fastest to drive while turning
+	_turnSpeed     = turnSpeed;  // the fastest to drive while turning
 	//_turnProgress  = 0;           // how far we have turned so far
 	// figure out which direction we are turning and set drive speed for that direction
 	if (_degreesToTurn > 0)
@@ -35,9 +35,9 @@ bool TurnDegreesCommand::IsFinished()
 {
 	float turnProgress = Robot::driveTrain->GetAngle();
 	SmartDashboard::PutNumber("Turn Progress", turnProgress);
-	if ((_turnSpeed > 0) && (turnProgress >= _degreesToTurn)) 
+	if ((_turnSpeed > 0) && (turnProgress > _degreesToTurn)) 
 		return false;
-	else if ((_turnSpeed < 0) && (turnProgress <= _degreesToTurn))
+	else if ((_turnSpeed < 0) && (turnProgress < _degreesToTurn))
 		return false;
 	else
 		return true;

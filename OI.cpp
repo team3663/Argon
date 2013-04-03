@@ -86,10 +86,10 @@ OI::OI() {
 	nudgeFrisbees->WhenPressed(new NudgeFlipperCommand());
 	
 	decreasePitch = new JoystickButton(targetJoystick, 2);
-	decreasePitch->WhileHeld(new DecreasePitchCommand());
+	decreasePitch->WhileHeld(new DecreasePitchCommand(-0.5));
 	
 	increasePitch = new JoystickButton(targetJoystick, 3);
-	increasePitch->WhileHeld(new IncreasePitchCommand());
+	increasePitch->WhileHeld(new IncreasePitchCommand(0.5));
 	
 	shootPiston = new JoystickButton(targetJoystick, 1);
 	shootPiston->WhenPressed(new ShootPistonCommand());
