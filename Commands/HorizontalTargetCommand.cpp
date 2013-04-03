@@ -17,74 +17,25 @@ HorizontalTargetCommand::~HorizontalTargetCommand()
 
 void HorizontalTargetCommand::Initialize()
 {
-	/*
-	if (Robot::targetting->Target())
-		{
-			DriverStationLCD::GetInstance()->PrintfLine(DriverStationLCD::kUser_Line5, "Targetting Worked");
-			DriverStationLCD::GetInstance()->UpdateLCD();
-			double difference = Robot::targetting->GetTargetRect()->center_mass_x_normalized;
-			float waitTime = difference * 5;
-			if (difference > 0.0)
-				Robot::driveTrain->Drive(0, 0.4);
-			else
-				Robot::driveTrain->Drive(0, -0.4);
-			
-			WaitCommand(waitTime).Run();
-			
-			if (difference < 0.06 && difference > -0.06)
-				done = true;
-			
-			Robot::targetting->Target();
-			float newDifference = Robot::targetting->GetTargetRect()->center_mass_x_normalized;
-			if (newDifference > difference)
-				constant = waitTime / (newDifference - difference);
-			else
-				constant = waitTime / (difference - newDifference);
-		}
-		else
-		{
-			DriverStationLCD::GetInstance()->PrintfLine(DriverStationLCD::kUser_Line5, "Targetting Failed");
-			DriverStationLCD::GetInstance()->UpdateLCD();
-			done = true;
-		}
-		*/
+	// Target gets the image, analyzes it for rectangles, and stores info on all of them
 	if(!Robot::targetting->Target())
 	{
+		// if it fails to get an image for targeting, we are done
 		done = true;
 	}
 }
 
 void HorizontalTargetCommand::Execute()
-{/*
-	if (Robot::targetting->Target())
-	{
-		DriverStationLCD::GetInstance()->PrintfLine(DriverStationLCD::kUser_Line5, "Targetting Worked");
-		DriverStationLCD::GetInstance()->UpdateLCD();
-		double difference = Robot::targetting->GetTargetRect()->center_mass_x_normalized;
-		if (difference > 0.0)
-			Robot::driveTrain->Drive(0, 0.4);
-		else
-			Robot::driveTrain->Drive(0, -0.4);
-		
-		WaitCommand(constant * difference).Run();
-		
-		if (difference < 0.06 && difference > -0.06)
-			done = true;
-	}
-	else
-	{
-		DriverStationLCD::GetInstance()->PrintfLine(DriverStationLCD::kUser_Line5, "Targetting Failed");
-		DriverStationLCD::GetInstance()->UpdateLCD();
-		done = true;
-	}
-	*/
+{
+	// This step gets the info on rectangles and selects the one we want to target based on menu on SmartDashboard
 	ParticleAnalysisReport* rect = Robot::targetting->GetTargetRect();
 	if (rect != NULL && done == false)
 	{
 		float distance = Robot::targetting->CalcDistance(rect);
-		float difference = abs(TARGET_POINT - rect->center_mass_x);
+		int difference = abs(TARGET_POINT - rect->center_mass_x);
+		// camera sees 67 degrees of width and image is 640 pixels wide
 		float degreesToTurn = (TARGET_POINT - rect->center_mass_x) * 67 / 640;
-		//float degreesToTurn = difference / (3.14 * 2 * distance) * 100 / 360; // find percentage of circle we have to travel then convert to degrees
+		// make sure this command runs in series, not parallel
 		TurnDegreesCommand(degreesToTurn, 0.5).Run();
 	}
 }
