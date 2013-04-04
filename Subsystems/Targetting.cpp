@@ -17,6 +17,35 @@ Targetting::~Targetting()
 	delete (newestData);
 }
 
+void Targetting::WriteCurrentData()
+{
+	ofstream file("/processingData.txt", ios::out | ios::app);
+	if (!file.is_open())
+		return;
+	
+	file << "Shot Number: " << Robot::diskManagement->GetShotNum() << "\n";
+	
+	Target();
+	ParticleAnalysisReport* currRect = GetTargetRect();
+	
+	if (currRect == NULL)
+	{
+		file << "Rectangle Not Found \n";
+	}
+	else
+	{
+		file << "Rect X center: " << currRect->center_mass_x << "\n";
+		file << "Rect Y center: " << currRect->center_mass_y << "\n";
+		file << "Rect width: " << currRect->boundingRect.width << "\n";
+		file << "Rect height: " << currRect->boundingRect.height << "\n";
+	}
+	file << "Time Since Last Shot: " << Robot::diskManagement->GetTimeSinceLastShot() << "\n";
+	file << "Battery Voltage: " << DriverStation::GetInstance()->GetBatteryVoltage() << "\n";
+	file << "Shoot Speed: " << Robot::shooter->GetMotorSpeed() << "\n";
+	
+	file.close();
+}
+
 ParticleAnalysisReport* Targetting::FindRectWithRatio(float targetRatio, float tolerance)
 {
 	for (unsigned int i = 0; i < newestData->size(); i++)

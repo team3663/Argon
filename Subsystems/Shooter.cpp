@@ -26,6 +26,7 @@ void Shooter::InitDefaultCommand() {
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
 void Shooter::SetMotorSpeed(){
 	shooterMotorControl->Set(-_shootSpeed);
 	_isShooting = true;

@@ -17,6 +17,7 @@ public:
 	ParticleAnalysisReport* GetThreePointRect();
 	ParticleAnalysisReport* GetTwoPointRect();
 	float CalcDistance(ParticleAnalysisReport* rect);
+	void WriteCurrentData();
 	Targetting();
 	~Targetting();
 	bool Target();
