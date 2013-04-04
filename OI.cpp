@@ -30,6 +30,7 @@
 #include "Commands/PIDDriveCommand.h"
 #include "Commands/EncoderDriveToCommand.h"
 #include "Commands/TurnDegreesCommand.h"
+//#include "Commands/VerticalTargetCommand.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -97,6 +98,7 @@ OI::OI() {
 	SmartDashboard::PutData("Drive To Line", new DriveToLineCommand(48, 0.6, 3));
 	SmartDashboard::PutData("Drive To Point", new DriveToPointCommand(12, 0.4, 0));
 	SmartDashboard::PutData("Horizontal Target", new HorizontalTargetCommand());
+	SmartDashboard::PutData("Vertical Target", new VerticalTargetCommand());
 }
 
 Joystick* OI::getDriveJoystick() {

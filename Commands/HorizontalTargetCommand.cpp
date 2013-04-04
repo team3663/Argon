@@ -38,7 +38,7 @@ void HorizontalTargetCommand::Execute()
 		// camera sees 67 degrees of width and image is 640 pixels wide
 		float degreesToTurn = (TARGET_POINT - rect->center_mass_x) * 67 / 640;
 		// make sure this command runs in series, not parallel
-		TurnDegreesCommand(degreesToTurn, 0.5).Run();
+		while(!TurnDegreesCommand(degreesToTurn, 0.5).Run()) {} // TODO find out if this is the right way to run commands within commands
 	}
 }
 
