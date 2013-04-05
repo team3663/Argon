@@ -65,14 +65,14 @@ void RobotMap::init() {
         driveTrainRobotDrive3663->SetSensitivity(0.5);
         driveTrainRobotDrive3663->SetMaxOutput(1.0);
         
-    driveTrainLeftEncoder = new Encoder(1, 12, 1, 13, false, Encoder::k4X);
+    driveTrainLeftEncoder = new Encoder(1, 10, 1, 11, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "LeftEncoder", driveTrainLeftEncoder);
 	driveTrainLeftEncoder->SetDistancePerPulse(1.0);
 	
 		driveTrainLeftEncoder->SetPIDSourceParameter(Encoder::kRate);
 		driveTrainLeftEncoder->Start();
 		
-	driveTrainRightEncoder = new Encoder(1, 10, 1, 11, true, Encoder::k4X);
+	driveTrainRightEncoder = new Encoder(1, 8, 1, 9, true, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "RightEncoder", driveTrainRightEncoder);
 	driveTrainRightEncoder->SetDistancePerPulse(1.0);
 	
@@ -88,7 +88,7 @@ void RobotMap::init() {
 	shooterShooterMotorControl = new Victor(1, 1);
 	lw->AddActuator("Shooter", "ShooterMotorControl", (Victor*) shooterShooterMotorControl);
 	
-	shooterShooterEncoder = new Encoder(1, 8, 1, 9, true, Encoder::k4X);
+	shooterShooterEncoder = new Encoder(1, 12, 1, 13, true, Encoder::k4X);
 	lw->AddSensor("Shooter", "ShooterEncoder", shooterShooterEncoder);
 	shooterShooterEncoder->SetDistancePerPulse(1.0);
 	
@@ -125,7 +125,7 @@ void RobotMap::init() {
 	photoelectricGroundSensor = new DigitalInput(1, 14);
 	lw->AddSensor("Photoelectric", "GroundSensor", photoelectricGroundSensor);
 	
-	photoelectricShooterSensor = new DigitalInput(1, 2);
+	photoelectricShooterSensor = new DigitalInput(1, 1);
 	lw->AddSensor("DiskManagement", "ShooterLightSensor", photoelectricShooterSensor);
 	
 	climberClimbMotorController = new Victor(1, 8);

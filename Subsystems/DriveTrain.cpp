@@ -10,7 +10,7 @@
 #define ACCEL_LIMIT 0.2
 #define DECEL_LIMIT 0.2
 #define PI 				3.14159
-#define ENCODER_CORRECT 4 * 12 * 1.08 / 22 / 1440
+#define ENCODER_CORRECT 4 * 12 / 22 / 1440 * 5 / 3
 #include "DriveTrain.h"
 #include "../Robotmap.h"
 DriveTrain::DriveTrain() : Subsystem("DriveTrain") {

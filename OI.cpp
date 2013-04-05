@@ -30,6 +30,7 @@
 #include "Commands/PIDDriveCommand.h"
 #include "Commands/EncoderDriveToCommand.h"
 #include "Commands/TurnDegreesCommand.h"
+#include "Commands/ShootUntilEmptyCommand.h"
 //#include "Commands/VerticalTargetCommand.h"
 
 OI::OI() {
@@ -67,8 +68,11 @@ OI::OI() {
 	turnRight = new JoystickButton(targetJoystick, 4);
 	turnRight->WhileHeld(new TurnRightCommand());
 	
-	changeShooter = new JoystickButton(targetJoystick, 11);
-	changeShooter->WhenPressed(new SpinCommand());
+	shooterOn = new JoystickButton(targetJoystick, 11);
+	shooterOn->WhenPressed(new SpinUpCommand());
+	
+	shooterOff = new JoystickButton(targetJoystick, 10);
+	shooterOff->WhenPressed(new SpinDownCommand());
 	
 	flipFrisbees = new JoystickButton(targetJoystick, 6);
 	flipFrisbees->WhenPressed(new FlipperCommand());
@@ -94,11 +98,13 @@ OI::OI() {
         // SmartDashboard Buttons
 	SmartDashboard::PutData("Turn 90", new TurnDegreesCommand(90, 0.6));
 	SmartDashboard::PutData("Turn -90", new TurnDegreesCommand(-90, 0.6));
-	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveToCommand(60));
+	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveToCommand(60, 0.8, 3));
 	SmartDashboard::PutData("Drive To Line", new DriveToLineCommand(48, 0.6, 3));
-	SmartDashboard::PutData("Drive To Point", new DriveToPointCommand(12, 0.4, 0));
+	SmartDashboard::PutData("Drive To Point", new DriveToPointCommand(12, 0.6, 0));
 	SmartDashboard::PutData("Horizontal Target", new HorizontalTargetCommand());
 	SmartDashboard::PutData("Vertical Target", new VerticalTargetCommand());
+	SmartDashboard::PutData("Increase Pitch", new IncreasePitchCommand(0.8, 1.0));
+	SmartDashboard::PutData("Shoot Until Empty", new ShootUntilEmptyCommand());
 }
 
 Joystick* OI::getDriveJoystick() {

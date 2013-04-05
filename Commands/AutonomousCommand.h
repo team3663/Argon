@@ -21,7 +21,9 @@
 #include "GearShiftUp.h"
 #include "EncoderDriveToCommand.h"
 #include "DriveToPointCommand.h"
+#include "DriveTestCommand.h"
 #include "SetShootSpeedCommand.h"
+
 #include "AutonomousFinishedCommand.h"
 /**
  *

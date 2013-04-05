@@ -41,7 +41,7 @@ void Targetting::WriteCurrentData()
 	}
 	file << "Time Since Last Shot: " << Robot::diskManagement->GetTimeSinceLastShot() << "\n";
 	file << "Battery Voltage: " << DriverStation::GetInstance()->GetBatteryVoltage() << "\n";
-	file << "Shoot Speed: " << Robot::shooter->GetMotorSpeed() << "\n";
+	file << "Shoot Speed: " << Robot::shooter->GetMotorSpeed() << "\n \n";
 	
 	file.close();
 }

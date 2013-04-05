@@ -2,7 +2,8 @@
 
 DriveTestCommand::DriveTestCommand()
 {
-	
+	Requires(Robot::driveTrain);
+	SetTimeout(1.0);
 }
 
 void DriveTestCommand::Initialize()
@@ -12,13 +13,12 @@ void DriveTestCommand::Initialize()
 
 void DriveTestCommand::Execute()
 {
-	RobotMap::driveTrainSpeedControlLeft1->Set(0.5);
-	
+	Robot::driveTrain->Drive(0.6,0);
 }
 
 bool DriveTestCommand::IsFinished()
 {
-	return false;
+	return IsTimedOut();
 }
 
 void DriveTestCommand::End()

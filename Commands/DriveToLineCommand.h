@@ -30,6 +30,7 @@ private:
 	float decayFactor;
 	bool  reachedEndpoint;
 	float driveDistance;
+	int driveDirection;
 public:
 	DriveToLineCommand(float distanceToDrive, float maxSpeed, int decay);
 	virtual void Initialize();

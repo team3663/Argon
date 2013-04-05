@@ -2,6 +2,7 @@
 #define HORIZONTAL_TARGET_COMMAND_H
 
 #include "../Robot.h"
+#include "TurnDegreesCommand.h"
 
 class HorizontalTargetCommand: public Command
 {

@@ -14,23 +14,27 @@ AutonomousCommand::AutonomousCommand() {
 	// set riser to top while spinning up
 	AddSequential(new IncreasePitchCommand(1.0, 6.0));
 	//wait to allow full wheel spin up
-	AddSequential(new WaitCommand(1.5));
+//	AddSequential(new WaitCommand(1.5));
 	// shift to low for stability
-	AddSequential(new GearShiftUp()); 
+	AddSequential(new GearShiftDown()); 
 	//shoot three frisbees
 	for (int i = 0; i < 3; i++)
 	{
 		AddSequential(new ShootPistonCommand());
-		AddSequential(new WaitCommand(1.0));
+		AddSequential(new WaitCommand(0.8));
 	}
 	// In case a frisbee got stuck
 	AddSequential(new NudgeFlipperCommand()); 
-	AddSequential(new WaitCommand(0.5));
+	AddSequential(new WaitCommand(0.3));
 	AddSequential(new ShootPistonCommand());
+	//drive forward to get clear of pyramid
+	AddSequential(new DriveTestCommand());
+	AddSequential(new WaitCommand(0.5));
+	//AddSequential(new EncoderDriveToCommand(12, 0.8, 1));
+	//turn to left to face feeder
+	AddSequential(new TurnDegreesCommand(90, 0.6));
 	//lower pitch to approximate feeder shooting
-	AddParallel(new DecreasePitchCommand(-0.8, 1.3));
-	//turn to right to face wall
-	AddSequential(new TurnDegreesCommand(-25, 0.5));
+	AddParallel(new DecreasePitchCommand(-0.6));
 	/*
 	AddSequential(new DriveToPointCommand(12, 0.4, 0));
 	AddSequential(new WaitCommand(0.25));

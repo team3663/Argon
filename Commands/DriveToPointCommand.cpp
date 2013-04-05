@@ -27,7 +27,7 @@ void DriveToPointCommand::Initialize() {
 	
 	WaitCommand(0.2).Run();          	// drive for a short while
     // figure out how far we need to go
-	distanceToDrive = currDistance - targetDistance;
+	distanceToDrive = Robot::rangeFinder->Distances[frontSonic] - targetDistance;
 }
 
 void DriveToPointCommand::Execute() {
@@ -41,15 +41,15 @@ void DriveToPointCommand::Execute() {
 	// This creates a ratio around 1, then subtracts to make it vary around 0 instead
 	// Use this as the correcting curve in the drive command
 	if ((distanceToDrive - currDistance) > MIN_CORRECTION_DIST) { // if we have moved far enough that they are both positive
-	    curve = (Robot::driveTrain->GetRightDistance() / Robot::driveTrain->GetLeftDistance()) - 1;
-	    Robot::driveTrain->Drive(driveSpeed,curve);
+	    //curve = (Robot::driveTrain->GetRightDistance() / Robot::driveTrain->GetLeftDistance()) - 1;
+	    Robot::driveTrain->Drive(-driveSpeed,0.0);
 	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveToPointCommand::IsFinished() {
 	// end if we are now at or beyond the target distance from the obstacle
-	if (currDistance <= targetDistance)
+	if (Robot::rangeFinder->Distances[frontSonic] <= targetDistance)
 		return true;
 	else if (IsTimedOut())
 		return true;

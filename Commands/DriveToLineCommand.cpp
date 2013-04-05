@@ -12,13 +12,18 @@ DriveToLineCommand::DriveToLineCommand(float distanceToDrive, float maxSpeed, in
 	reachedEndpoint = false;  // whether command is completed or not
 	driveDistance = distanceToDrive;
 	
+	if (driveDistance < 0)
+		driveDirection = -1;
+	else
+		driveDirection = 1;
+	
 	SetTimeout(10.0);  // set the command to end at 10 seconds if not yet completed
 }
 
 void DriveToLineCommand::Initialize() {
-	Robot::driveTrain->DriveEncoderReset();  // reset encoder to zero to start;
-	Robot::driveTrain->Drive(0.4,0);        // short drive to start the encoder counting
-	WaitCommand(0.25).Run();               
+	//Robot::driveTrain->DriveEncoderReset();  // reset encoder to zero to start;
+	//Robot::driveTrain->Drive(0.4,0);        // short drive to start the encoder counting
+	//WaitCommand(0.25).Run();               
 }
 
 void DriveToLineCommand::Execute() {
@@ -35,8 +40,8 @@ void DriveToLineCommand::Execute() {
     // check that both encoders are measuring the same
 	// This creates a ratio around 1, then subtracts to make it vary around 0 instead
 	// Use this as the correcting curve in the drive command
-	curve = (Robot::driveTrain->GetRightDistance() / Robot::driveTrain->GetLeftDistance()) - 1;
-	Robot::driveTrain->Drive(driveSpeed,curve);
+	//curve = (Robot::driveTrain->GetRightDistance() / Robot::driveTrain->GetLeftDistance()) - 1;
+	Robot::driveTrain->Drive(-driveSpeed * driveDirection,0.0);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -17,7 +17,8 @@ private:
 	
 	JoystickButton* targetButton;
 	
-	JoystickButton* changeShooter;
+	JoystickButton* shooterOn;
+	JoystickButton* shooterOff;
 	JoystickButton* gearShift;
 	JoystickButton* flipFrisbees;
 	JoystickButton* nudgeFrisbees;

@@ -30,8 +30,9 @@ private:
 	float curve;
 	float driveProgress;
 	bool reachedEndpoint;
+	int driveDirection;
 public:
-	EncoderDriveToCommand(float distanceToDrive, float maxSpeed = 0.8, float decayFactor = 4.0);
+	EncoderDriveToCommand(float distanceToDrive, float maxSpeed, float decayFactor);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

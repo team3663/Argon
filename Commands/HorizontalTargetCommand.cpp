@@ -38,7 +38,9 @@ void HorizontalTargetCommand::Execute()
 		// camera sees 67 degrees of width and image is 640 pixels wide
 		float degreesToTurn = (TARGET_POINT - rect->center_mass_x) * 67 / 640;
 		// make sure this command runs in series, not parallel
-		while(!TurnDegreesCommand(degreesToTurn, 0.5).Run()) {} // TODO find out if this is the right way to run commands within commands
+		SmartDashboard::PutNumber("Targetting Turn Value", degreesToTurn);
+		TurnDegreesCommand command(degreesToTurn, 0.5);
+		while(!command.Run()) {} // TODO find out if this is the right way to run commands within commands
 	}
 }
 
@@ -47,7 +49,7 @@ bool HorizontalTargetCommand::IsFinished()
 	if (Robot::targetting->Target())
 	{
 		ParticleAnalysisReport* rect = Robot::targetting->GetTargetRect();
-		return IsTimedOut() || (rect->center_mass_x < TARGET_POINT + TOLERANCE && rect->center_mass_x > TARGET_POINT - TOLERANCE);
+		return IsTimedOut() || rect == NULL || (rect->center_mass_x < TARGET_POINT + TOLERANCE && rect->center_mass_x > TARGET_POINT - TOLERANCE);
 	}
 	else
 		return true;
