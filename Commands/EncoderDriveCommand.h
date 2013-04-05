@@ -9,8 +9,8 @@
 // it from being updated in th future.
 
 
-#ifndef ENCODERDRIVETOCOMMAND_H
-#define ENCODERDRIVETOCOMMAND_H
+#ifndef ENCODERDRIVECOMMAND_H
+#define ENCODERDRIVECOMMAND_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,7 +21,7 @@
  *
  * @author ExampleAuthor
  */
-class EncoderDriveToCommand: public Command {
+class EncoderDriveCommand: public Command {
 private:
 	float distanceToDrive;
 	float maxSpeed;
@@ -32,7 +32,7 @@ private:
 	bool reachedEndpoint;
 	int driveDirection;
 public:
-	EncoderDriveToCommand(float distanceToDrive, float maxSpeed, float decayFactor);
+	EncoderDriveCommand(float distanceToDrive, float maxSpeed, float decayFactor);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

@@ -9,7 +9,7 @@
 #include "Commands/DecreasePitchCommand.h"
 #include "Commands/DriveCommand.h"
 #include "Commands/DriveToPointCommand.h"
-#include "Commands/EncoderDriveToCommand.h"
+#include "Commands/EncoderDriveCommand.h"
 #include "Commands/FlipperCommand.h"
 #include "Commands/NudgeFlipperCommand.h"
 #include "Commands/GearShiftCommand.h"
@@ -27,8 +27,6 @@
 #include "Commands/TurnLeftCommand.h"
 #include "Commands/TurnRightCommand.h"
 #include "Commands/ResetGyroCommand.h"
-#include "Commands/PIDDriveCommand.h"
-#include "Commands/EncoderDriveToCommand.h"
 #include "Commands/TurnDegreesCommand.h"
 #include "Commands/ShootUntilEmptyCommand.h"
 //#include "Commands/VerticalTargetCommand.h"
@@ -98,7 +96,7 @@ OI::OI() {
         // SmartDashboard Buttons
 	SmartDashboard::PutData("Turn 90", new TurnDegreesCommand(90, 0.6));
 	SmartDashboard::PutData("Turn -90", new TurnDegreesCommand(-90, 0.6));
-	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveToCommand(60, 0.8, 3));
+	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveCommand(60, 0.8, 3));
 	SmartDashboard::PutData("Drive To Line", new DriveToLineCommand(48, 0.6, 3));
 	SmartDashboard::PutData("Drive To Point", new DriveToPointCommand(12, 0.6, 0));
 	SmartDashboard::PutData("Horizontal Target", new HorizontalTargetCommand());

@@ -29,7 +29,7 @@ AutonomousNinetyCommand::AutonomousNinetyCommand() {
 	AddParallel(new SpinDownCommand());
 	AddSequential(new GearShiftUp());
 	AddSequential(new DecreasePitchCommand(-0.8, 2.0));
-	AddSequential(new EncoderDriveToCommand(24, 0.4, 4.0));
+	AddSequential(new EncoderDriveCommand(24, 0.4, 4.0));
 	AddSequential(new TurnDegreesCommand(-95, 0.3));
 	AddSequential(new DriveToPointCommand(60, 0.4, 0));
 	AddSequential(new WaitCommand(0.25));

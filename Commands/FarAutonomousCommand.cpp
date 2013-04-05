@@ -21,7 +21,7 @@ FarAutonomousCommand::FarAutonomousCommand() {
 	AddSequential(new GearShiftUp());
 	AddSequential(new DecreasePitchCommand(-0.8, 1.0));
 	/*AddSequential(new TurnDegreesCommand(-70, 0.6, 3));
-	AddSequential(new EncoderDriveToCommand(36));
+	AddSequential(new EncoderDriveCommand(36));
 	AddSequential(new WaitCommand(0.25));
 	AddSequential(new TurnDegreesCommand(90, 0.6, 3));
 	AddSequential(new DriveToPointCommand(12.0, 0.6, 1));

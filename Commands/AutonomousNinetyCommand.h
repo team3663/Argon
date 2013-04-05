@@ -19,7 +19,7 @@
 #include "DriveToLineCommand.h"
 #include "NudgeFlipperCommand.h"
 #include "GearShiftUp.h"
-#include "EncoderDriveToCommand.h"
+#include "EncoderDriveCommand.h"
 #include "DriveToPointCommand.h"
 #include "SetShootSpeedCommand.h"
 /**

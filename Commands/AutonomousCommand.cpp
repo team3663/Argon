@@ -30,7 +30,7 @@ AutonomousCommand::AutonomousCommand() {
 	//drive forward to get clear of pyramid
 	AddSequential(new DriveTestCommand());
 	AddSequential(new WaitCommand(0.5));
-	//AddSequential(new EncoderDriveToCommand(12, 0.8, 1));
+	//AddSequential(new EncoderDriveCommand(12, 0.8, 1));
 	//turn to left to face feeder
 	AddSequential(new TurnDegreesCommand(90, 0.6));
 	//lower pitch to approximate feeder shooting
