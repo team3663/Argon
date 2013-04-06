@@ -3,6 +3,7 @@
 
 #include "Commands/IncreasePitchCommand.h"
 #include "Commands/DecreasePitchCommand.h"
+#include "Commands/ChangePitchCommand.h"
 #include "Commands/AutonomousCommand.h"
 #include "Commands/DriveCommand.h"
 #include "Commands/ShootPistonCommand.h"

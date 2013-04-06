@@ -38,7 +38,7 @@ ShootAutonomousCommand::ShootAutonomousCommand() {
 	AddSequential(new ShootPistonCommand());
 	AddParallel(new SpinDownCommand());
 	AddSequential(new GearShiftUp());
-	AddSequential(new DecreasePitchCommand(6.0));
+	AddSequential(new DecreasePitchCommand(-6.0));
 	/*AddSequential(new TurnDegreesCommand(-25, 0.6, 3));
 	AddSequential(new DriveToPointCommand(12, 0.6, 0));
 	AddSequential(new WaitCommand(0.25));

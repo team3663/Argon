@@ -96,7 +96,8 @@ OI::OI() {
         // SmartDashboard Buttons
 	SmartDashboard::PutData("Turn 90", new TurnDegreesCommand(90, 0.6));
 	SmartDashboard::PutData("Turn -90", new TurnDegreesCommand(-90, 0.6));
-	SmartDashboard::PutData("Drive With Encoder", new EncoderDriveCommand(60, 0.8, 3));
+	SmartDashboard::PutData("Drive Forward Encoder", new EncoderDriveCommand(60));//, 0.8, 3));
+	SmartDashboard::PutData("Drive Backward Encoder", new EncoderDriveCommand(-60));//, 0.8, 3));
 	SmartDashboard::PutData("Drive To Line", new DriveToLineCommand(48, 0.6, 3));
 	SmartDashboard::PutData("Drive To Point", new DriveToPointCommand(12, 0.6, 0));
 	SmartDashboard::PutData("Horizontal Target", new HorizontalTargetCommand());

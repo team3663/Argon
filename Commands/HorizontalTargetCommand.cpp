@@ -23,6 +23,7 @@ void HorizontalTargetCommand::Initialize()
 	if(!Robot::targetting->Target())
 	{
 		// if it fails to get an image for targeting, we are done
+		SmartDashboard::PutString("Horiz. Targetting State", "No Image Found");
 		done = true;
 	}
 }
@@ -33,12 +34,13 @@ void HorizontalTargetCommand::Execute()
 	ParticleAnalysisReport* rect = Robot::targetting->GetTargetRect();
 	if (rect != NULL && done == false)
 	{
-		float distance = Robot::targetting->CalcDistance(rect);
-		int difference = abs(TARGET_POINT - rect->center_mass_x);
+//		float distance = Robot::targetting->CalcDistance(rect);
+//		int difference = abs(TARGET_POINT - rect->center_mass_x);
 		// camera sees 67 degrees of width and image is 640 pixels wide
 		float degreesToTurn = (TARGET_POINT - rect->center_mass_x) * 67 / 640;
 		// make sure this command runs in series, not parallel
-		SmartDashboard::PutNumber("Targetting Turn Value", degreesToTurn);
+		SmartDashboard::PutString("Horiz. Targetting State", "Turning");
+		SmartDashboard::PutNumber("Horiz. Targetting Degrees", degreesToTurn);
 		TurnDegreesCommand command(degreesToTurn, 0.5);
 		while(!command.Run()) {} // TODO find out if this is the right way to run commands within commands
 	}
@@ -49,10 +51,29 @@ bool HorizontalTargetCommand::IsFinished()
 	if (Robot::targetting->Target())
 	{
 		ParticleAnalysisReport* rect = Robot::targetting->GetTargetRect();
-		return IsTimedOut() || rect == NULL || (rect->center_mass_x < TARGET_POINT + TOLERANCE && rect->center_mass_x > TARGET_POINT - TOLERANCE);
+//		return IsTimedOut() || rect == NULL || (rect->center_mass_x < TARGET_POINT + TOLERANCE && rect->center_mass_x > TARGET_POINT - TOLERANCE);
+		if (IsTimedOut())
+		{
+			SmartDashboard::PutString("Horiz. Targetting State", "Timed Out");
+			return true;
+		}
+		if (rect == NULL)
+		{
+			SmartDashboard::PutString("Horiz. Targetting State", "Rect Not Found");
+			return true;
+		}
+		if (rect->center_mass_x < TARGET_POINT + TOLERANCE && rect->center_mass_x > TARGET_POINT - TOLERANCE)
+		{
+			SmartDashboard::PutString("Horiz. Targetting State", "On Target");
+			return true;
+		}
+		return false;
 	}
 	else
+	{
+		SmartDashboard::PutString("Horiz. Targetting State", "No Image Found");
 		return true;
+	}
 }
 
 void HorizontalTargetCommand::End()

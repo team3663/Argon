@@ -3,7 +3,7 @@
 DriveTestCommand::DriveTestCommand()
 {
 	Requires(Robot::driveTrain);
-	SetTimeout(1.0);
+	SetTimeout(0.5);
 }
 
 void DriveTestCommand::Initialize()

@@ -17,6 +17,7 @@ protected:
 	void Interrupted();
 private:
 	bool done;
+	static const float degreesPerSecond = 0.0; // TODO Find a real value for this
 };
 
 #endif

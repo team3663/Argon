@@ -27,10 +27,10 @@ void Targetting::WriteCurrentData()
 	
 	Target();
 	ParticleAnalysisReport* currRect = GetTargetRect();
-	
+	file << "Num of Rects: " << newestData->size() << "\n";
 	if (currRect == NULL)
 	{
-		file << "Rectangle Not Found \n";
+		file << "Target Not Found \n";
 	}
 	else
 	{
@@ -77,12 +77,12 @@ ParticleAnalysisReport* Targetting::GetTargetRect()
 
 ParticleAnalysisReport* Targetting::GetThreePointRect()
 {
-	return FindRectWithRatio(4.5, 0.2);
+	return FindRectWithRatio(3.0, 0.2);
 }
 
 ParticleAnalysisReport* Targetting::GetTwoPointRect()
 {
-	return FindRectWithRatio(2.3, 0.3);
+	return FindRectWithRatio(2.1, 0.3);
 }
 
 float Targetting::CalcDistance(ParticleAnalysisReport* rect)
@@ -136,6 +136,7 @@ bool Targetting::Target()
 		screen->PrintfLine(DriverStationLCD::kUser_Line4, "Rect Center Y: %f", reports->at(0).center_mass_y_normalized);
 		screen->PrintfLine(DriverStationLCD::kUser_Line5, "Rect Width: %i", reports->at(0).boundingRect.width);
 		*/
+		/*
 		fstream outputFile("/processingData.txt");
 		for (unsigned int num = 0; num < reports->size(); num++)
 		{
@@ -148,6 +149,7 @@ bool Targetting::Target()
 			outputFile << "Rect Height: " << reports->at(num).boundingRect.height << "\n \n";
 		}
 		outputFile.close();
+		*/
 	}
 	screen->UpdateLCD();
 	
